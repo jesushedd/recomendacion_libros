@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro - Clásicos y Elegantes</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
+</head>
+<body>
+  <main class="login-container">
+    <div class="login-box">
+      <h2>Registro</h2>
+      <form id="formRegistro" method="post"  action="{% url 'core:registro' %}">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Nombre completo" required />
+        <input type="text" name="apellido" placeholder="Apellido" required />
+        <input type="email" name="email" placeholder="Correo electrónico" required />
+        <div class="password-field">
+          <input type="password" name="password" id="contrasena" placeholder="Contraseña" required />
+          <span class="toggle-password" id="togglePasswordRegistro">👁️</span>
+        </div>
+        <div class="password-field">
+          <input type="password" name="confirmar_contrasena" id="confirmar_contrasena" placeholder="Confirmar contraseña" required />
+          <span class="toggle-password" id="toggleConfirmPasswordRegistro">👁️</span>
+        </div>
+        <button type="submit">Crear cuenta</button>
+        <a href="index.html" class="register-btn">Volver al inicio</a>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const togglePassword = document.getElementById('togglePasswordRegistro');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPasswordRegistro');
+    const contrasenaInput = document.getElementById('contrasena');
+    const confirmarInput = document.getElementById('confirmar_contrasena');
+
+    togglePassword.addEventListener('click', () => {
+      const isPassword = contrasenaInput.type === 'password';
+      contrasenaInput.type = isPassword ? 'text' : 'password';
+      togglePassword.textContent = isPassword ? '🙈' : '👁️';
+    });
+
+    toggleConfirmPassword.addEventListener('click', () => {
+      const isPassword = confirmarInput.type === 'password';
+      confirmarInput.type = isPassword ? 'text' : 'password';
+      toggleConfirmPassword.textContent = isPassword ? '🙈' : '👁️';
+    });
+
+    document.getElementById("formRegistro").addEventListener("submit", function(event) {
+      const contrasena = contrasenaInput.value;
+      const confirmar = confirmarInput.value;
+
+      if (contrasena !== confirmar) {
+        alert("Las contraseñas no coinciden.");
+        event.preventDefault();
+      } else {
+        alert("¡Cuenta creada correctamente!");
+        
+      }
+    });
+  </script>
+</body>
+</html>

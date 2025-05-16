@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión - Clásicos y Elegantes</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
+
+</head>
+<body>
+  <main class="login-container">
+    <div class="login-box">
+      <h2>Ingresar</h2>
+      <form action="/login" method="post">
+        {% csrf_token %}
+        <input type="email" placeholder="Correo electrónico" required name="email"/>
+        <div class="password-field">
+          <input name=password type="password" id="passwordInput" placeholder="Contraseña" required />
+          <span class="toggle-password" id="togglePasswordLogin">👁️</span>
+        </div>
+        {% if error_message%}
+          <div>Credenciales Incorrectas</div>
+        {% endif %}
+        <div class="links">
+          <a href="#">¿Olvidó su contraseña?</a>
+          <a href="#">Ayuda</a>
+        </div>
+        <button type="submit" class="main-btn">Ingresar</button>
+        <a href="registro.html" class="register-btn">Registrarse</a>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const toggleLogin = document.getElementById('togglePasswordLogin');
+    const inputLogin = document.getElementById('passwordInput');
+    toggleLogin.addEventListener('click', () => {
+      const isPassword = inputLogin.type === 'password';
+      inputLogin.type = isPassword ? 'text' : 'password';
+      toggleLogin.textContent = isPassword ? '🙈' : '👁️';
+    });
+  </script>
+</body>
+</html>

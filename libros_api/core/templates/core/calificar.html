@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{% if libro %}}
+    <title>Calificar {{libro.tiutlo}}</title>
+    {{% endif %}}
+</head>
+<body>
+    <main>
+        <form action="" method="post">
+            <label for="resenia">Reseña</label> 
+            <textarea name="resenia" id="resenia"></textarea>
+            <label for="puntaje">Puntaje</label>
+            <div>
+                <input type="radio" value="5" name="puntaje">&#11088	&#11088	&#11088	&#11088	&#11088</input>
+                <input type="radio" value="4" name="puntaje">&#11088	&#11088	&#11088	&#11088</input>
+                <input type="radio" value="3" name="puntaje">&#11088	&#11088	&#11088	</input>
+                <input type="radio" value="2" name="puntaje">&#11088	&#11088	</input>
+                <input type="radio" value="1" name="puntaje">&#11088	</input>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+
+        </form>
+    </main>
+    
+</body>
+</html>

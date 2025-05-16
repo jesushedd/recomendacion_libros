@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clubes de Lectura - Clásicos y Elegantes</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
+
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo">📚 Clásicos y Elegantes</div>
+      <nav>
+        <a href="/">Inicio</a>
+        <a href="/registro"><button class="signup">Sign up</button></a>
+        <a href="/login"><button class="login">Login</button></a>
+        <a href="/clubes"><button class="Clubs">Clubs</button></a>
+        <a href="/logout"><button class="login">Logout</button></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <h1 class="main-title">Clubes de Lectura</h1>
+    <p>Únete a uno de nuestros clubes y comparte tu amor por la lectura con otros lectores.</p>
+
+    <div class="club-container">
+      <div class="club-card">
+        <h2>Club de Misterio</h2>
+        <p>Explora novelas policiacas, thrillers y misterios sin resolver.</p>
+        <button onclick="unirseClub('Club de Misterio')">Unirse</button>
+      </div>
+
+      <div class="club-card">
+        <h2>Club de Fantasía</h2>
+        <p>Sumérgete en mundos mágicos y aventuras épicas.</p>
+        <button onclick="unirseClub('Club de Fantasía')">Unirse</button>
+      </div>
+
+      <div class="club-card">
+        <h2>Club de Clásicos</h2>
+        <p>Lee y comenta los clásicos eternos de la literatura.</p>
+        <button onclick="unirseClub('Club de Clásicos')">Unirse</button>
+      </div>
+
+      <div class="club-card">
+        <h2>Club Juvenil</h2>
+        <p>Perfecto para jóvenes lectores y literatura contemporánea juvenil.</p>
+        <button onclick="unirseClub('Club Juvenil')">Unirse</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    contacto@clasicosyelegantes.com | +51 987 654 321<br/>
+    © 2025 Clásicos y Elegantes. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function unirseClub(nombreClub) {
+      alert(`¡Te has unido a ${nombreClub}!`);
+      // Aquí podrías redirigir o guardar datos si usas backend
+    }
+  </script>
+</body>
+</html>
