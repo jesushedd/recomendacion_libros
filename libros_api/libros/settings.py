@@ -54,6 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://recomendacion-libros.onrender.com"
+]
+
 ROOT_URLCONF = 'libros.urls'
 
 TEMPLATES = [
