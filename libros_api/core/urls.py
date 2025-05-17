@@ -13,7 +13,10 @@ urlpatterns= [
     path("clubes", views.clubes),
     #link a un libro especifico /libro_id
     path("libro/<int:libro_id>", views.desc),
-    path("logout", views.logout_user)
+    #path logout
+    path("logout", views.logout_user),
+    #path /calificar/id_libro
+    path("calificar/<int:libro_id>", views.calificar, name="calificar")
     
 
 ]
