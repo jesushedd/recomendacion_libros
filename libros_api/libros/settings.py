@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "recomendacion-libros.onrender.com",
+    "localhost"
 ]
 
 
