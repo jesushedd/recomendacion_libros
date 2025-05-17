@@ -75,8 +75,14 @@ def desc(request, libro_id):
         })
 
 def calificar(request, libro_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect("/login")
     if request.method == 'GET':
-        pass
+        libro = get_object_or_404(Libro, pk=libro_id)
+        return render(request, "core/calificar.html",
+                      {
+                          'libro': libro
+                      })
     if request.method == 'POST':
         pass
     
