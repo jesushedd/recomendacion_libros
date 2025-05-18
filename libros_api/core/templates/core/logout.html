@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logut</title>
+    {% include "core/subs/links.html" %}
 </head>
 <body>
-    <div>Has Cerrado Sesión</div>
-    <a href="/">Volver</a>    
+    {% include "core/subs/header.html" %}
+    <main class="container">
+        <div>Has Cerrado Sesión</div>
+        <a href="/">Volver</a>
+    </main>
+    {% include "core/subs/footer.html" %}    
 </body>
 </html>

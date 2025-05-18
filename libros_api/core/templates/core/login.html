@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Iniciar Sesión - Clásicos y Elegantes</title>
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
-
+  {% include "core/subs/links.html" %}
 </head>
 <body>
+  {% include "core/subs/header.html" %}
   <main class="login-container">
     <div class="login-box">
       <h2>Ingresar</h2>
@@ -31,6 +30,7 @@
       </form>
     </div>
   </main>
+  {% include "core/subs/footer.html" %}
 
   <script>
     const toggleLogin = document.getElementById('togglePasswordLogin');

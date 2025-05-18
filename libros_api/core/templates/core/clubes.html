@@ -4,23 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Clubes de Lectura - Clásicos y Elegantes</title>
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
-
+  {% include "core/subs/links.html" %}
 </head>
 <body>
-  <header>
-    <div class="top-bar">
-      <div class="logo">📚 Clásicos y Elegantes</div>
-      <nav>
-        <a href="/">Inicio</a>
-        <a href="/registro"><button class="signup">Sign up</button></a>
-        <a href="/login"><button class="login">Login</button></a>
-        <a href="/clubes"><button class="Clubs">Clubs</button></a>
-        <a href="/logout"><button class="login">Logout</button></a>
-      </nav>
-    </div>
-  </header>
+  {% include "core/subs/header.html" %}
 
   <main class="content">
     <h1 class="main-title">Clubes de Lectura</h1>
@@ -53,10 +40,7 @@
     </div>
   </main>
 
-  <footer class="footer">
-    contacto@clasicosyelegantes.com | +51 987 654 321<br/>
-    © 2025 Clásicos y Elegantes. Todos los derechos reservados.
-  </footer>
+  {% include "core/subs/footer.html" %}
 
   <script>
     function unirseClub(nombreClub) {
