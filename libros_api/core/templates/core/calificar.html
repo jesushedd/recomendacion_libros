@@ -12,31 +12,7 @@
 </head>
 
 <body>
-  <header>
-    <div class="top-bar">
-      <div class="logo">
-        📚 <span class="menu-icon" onclick="toggleMenu()">☰</span>
-        <div id="dropdown" class="dropdown-menu">
-          <div>Nuevas entregas</div>
-          <div>Clásicos</div>
-          <div>Lo más pedido</div>
-          <div>Estreno</div>
-        </div>
-      </div>
-      <nav>
-        <a href="/">Inicio</a>
-        <a href="#">Categorías</a>
-        <a href="/clubes">Clubs</a>
-        <a href="#">Comentarios</a>
-      </nav>
-      <div class="auth-buttons">
-        <a href="/registro"><button class="signup">Sign up</button></a>
-        <a href="/login"><button class="login">Login</button></a>
-        <a href="/clubes"><button class="Clubs">Clubs</button></a>
-        <a href="/logout"><button class="login">Logout</button></a>
-      </div>
-    </div>
-  </header>
+  {% include "core/subs/header.html" %}
 
   <main class="container">
     <section class="card">
@@ -53,11 +29,7 @@
    
   </main>
 
-  <footer class="footer">
-    Calle Alelíes 221, Centro Histórico<br />
-    contacto@clasicosyelegantes.com | +51 987 654 321<br />
-    © 2025 Clásicos y Elegantes. Todos los derechos reservados.
-  </footer>
+  {% include "core/subs/footer.html" %}
 
   <script>
     function toggleMenu() {

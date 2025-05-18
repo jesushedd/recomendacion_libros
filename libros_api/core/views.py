@@ -4,22 +4,20 @@ from django.contrib.auth.models import User
 from .models import Libro
 from  django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import redirect_to_login
-
+from .helpers import check_user_logged
 # Create your views here.
 
 def pag_principal(request):
     if request.method == 'GET':
         catalogo = Libro.objects.all()[:5]
-        context= {
-            'catalogo': catalogo
-        }
 
-        if request.user.is_authenticated:
-            context['logged'] = True
+        context = check_user_logged(request)
+        context['catalogo'] = catalogo
         return render(request, "core/index.html", context)
 def registro(request):
     if request.method == 'GET':
-        return render(request, "core/registro.html")
+        context = check_user_logged(request)
+        return render(request, "core/registro.html", context)
     if request.method == 'POST':
         nombre = request.POST['nombre']
         apellido = request.POST['apellido']
@@ -37,9 +35,10 @@ def registro(request):
 
 def login_user(request):
     if request.method == 'GET':
+        context = check_user_logged(request)
         if request.user.is_authenticated:
             return HttpResponseRedirect("/")  # or "/"
-        return render(request, 'core/login.html')
+        return render(request, 'core/login.html', context)
     if request.method == 'POST':
 
         
@@ -50,7 +49,7 @@ def login_user(request):
         passwd = request.POST['password']
 
         user = authenticate(request, username=username, password=passwd)
-        print(user, "AAAAAAAAAAAA")
+        
         if user is not None:
             login(request, user)
             return HttpResponseRedirect("/")
@@ -63,31 +62,32 @@ def login_user(request):
 
     
 def logout_user(request):
+    context = check_user_logged(request)
     logout(request)
-    return render(request, 'core/logout.html')
+    return render(request, 'core/logout.html', context)
 
 
 def clubes(request):
+    
     if request.method == 'GET':
-        return render(request, 'core/clubes.html')
+        context = check_user_logged(request)
+        return render(request, 'core/clubes.html', context)
     
 def desc(request, libro_id):
     if request.method == 'GET':
+        context = check_user_logged(request)
         libro = get_object_or_404(Libro, pk=libro_id)
-        request.session['titulo_libro'] = libro.titulo
-        return render(request, 'core/libro.html', context={
-            'libro':libro
-        })
+        context['libro'] = libro
+        return render(request, 'core/libro.html', context)
 
 def calificar(request, libro_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect("/login")
     if request.method == 'GET':
         libro = get_object_or_404(Libro, pk=libro_id)
-        return render(request, "core/calificar.html",
-                      {
-                          'libro': libro
-                      })
+        context = check_user_logged(request)
+        context['libro'] = libro
+        return render(request, "core/calificar.html", context)
     if request.method == 'POST':
         pass
     
