@@ -8,7 +8,7 @@ urlpatterns= [
     #pagina para registarase /registro
     path("registro", views.registro, name='registro'),
     #pagina para login /login
-    path("login", views.login_user),
+    path("login", views.login_user, name='login'),
     #pagina  /clubes
     path("clubes", views.clubes),
     #link a un libro especifico /libro_id

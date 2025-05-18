@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from .models import Libro
 from  django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import redirect_to_login
 
 # Create your views here.
 
@@ -12,6 +13,9 @@ def pag_principal(request):
         context= {
             'catalogo': catalogo
         }
+
+        if request.user.is_authenticated:
+            context['logged'] = True
         return render(request, "core/index.html", context)
 def registro(request):
     if request.method == 'GET':
@@ -70,6 +74,7 @@ def clubes(request):
 def desc(request, libro_id):
     if request.method == 'GET':
         libro = get_object_or_404(Libro, pk=libro_id)
+        request.session['titulo_libro'] = libro.titulo
         return render(request, 'core/libro.html', context={
             'libro':libro
         })

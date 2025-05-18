@@ -16,10 +16,15 @@
         <a href="#">Comentarios</a>
       </nav>
       <div class="auth-buttons">
-        <a href="/registro"><button class="signup">Sign up</button></a>
-        <a href="/login"><button class="login">Login</button></a>
+        {% if not logged %}
+          <a href="/registro"><button class="signup">Sign up</button></a>
+          
+          <a href="/login"><button class="login">Login</button></a>
+        {% endif %}
         <a href="/clubes"><button class="Clubs">Clubs</button></a>
-        <a href="/logout"><button class="login">Logout</button></a>
+        {% if  logged %}
+          <a href="/logout"><button class="login">Logout</button></a>
+        {% endif %}
       </div>
     </div>
   </header>
