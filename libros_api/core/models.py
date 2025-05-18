@@ -9,7 +9,7 @@ class Libro(models.Model):
     genero = models.CharField(max_length=100)
     descripcion = models.TextField()
 
-class Resenias(models.Model):
+class Resenia(models.Model):
     PUNTAJES = [
         (1, 'Muy Malo'),
         (2, 'Malo'),
