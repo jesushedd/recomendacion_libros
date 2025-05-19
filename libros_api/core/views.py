@@ -5,6 +5,7 @@ from .models import Libro
 from  django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import redirect_to_login
 from .helpers import check_user_logged
+from .models import Resenia
 # Create your views here.
 
 def pag_principal(request):
@@ -86,7 +87,10 @@ def calificar(request, libro_id):
     if request.method == 'GET':
         libro = get_object_or_404(Libro, pk=libro_id)
         context = check_user_logged(request)
+
+
         context['libro'] = libro
+        context['opciones_puntaje'] = Resenia.PUNTAJES
         return render(request, "core/calificar.html", context)
     if request.method == 'POST':
         pass

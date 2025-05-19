@@ -22,12 +22,28 @@
             <div class="card-body">
                  <h5 class="card-title">{{libro.titulo}}</h5>
                 <p class="card-text">{{libro.descripcion}}</p>
-                <a href="/calificar/{{libro.id}}" class="btn btn-primary">Calficar</a>
                 </div>
             {% endif %}    
     </section>
-   
-  </main>
+    <section>
+      
+      <form action="{% url 'core:calificar' libro.id %}" method="post">
+        {% csrf_token %}
+        <div>
+          Calificación
+          {% if opciones_puntaje %}
+            {% for puntaje, text in opciones_puntaje %}
+              <label for="puntaje:{{ puntaje}}">{{puntaje}} - {{text}}</label>
+              <input id="puntaje:{{ puntaje}}" type="radio" name="puntaje" value="{{ puntaje }}" required>
+            {% endfor %}
+            <label for="comentario">Comentario/Reseña</label>
+            <textarea name="resenia" id="comentario"></textarea>
+            <button type="submit">Enviar Calificación</button>
+          {% endif %}
+        </div>
+      </form>
+    </section>
+    </main>
 
   {% include "core/subs/footer.html" %}
 
