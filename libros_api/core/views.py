@@ -112,7 +112,7 @@ def calificar(request, libro_id):
             resenia = Resenia(libro=libro_a_calficar, 
                 usuario=request.user, 
                 puntaje=puntaje,
-                comentario=resenia )
+                comentario=comentario)
             resenia.save()
         return HttpResponseRedirect(reverse("core:calificar", args=[libro_id]))
         

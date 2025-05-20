@@ -24,8 +24,12 @@
               <div class="card-body"> 
                   <h5 class="card-title">{{libro.titulo}}</h5>
                   <p class="card-text">{{libro.descripcion}}</p>
-                  <button href="#" class="btn btn-primary">Comprar</button>
-              </div>
+                </div>
+              {% if libro.puntaje_promedio %}
+                <div>{{ libro.puntaje_promedio }}</div>
+              {% else %}
+                <div>No calificado</div>
+              {% endif %}
             </article>
           </a>
           {% endfor %}
