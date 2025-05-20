@@ -6,6 +6,7 @@ from  django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import redirect_to_login
 from .helpers import check_user_logged
 from .models import Resenia
+from django.urls import reverse
 # Create your views here.
 
 def pag_principal(request):
@@ -84,15 +85,36 @@ def desc(request, libro_id):
 def calificar(request, libro_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect("/login")
+    
+    libro_a_calficar = get_object_or_404(Libro, pk=libro_id)
     if request.method == 'GET':
-        libro = get_object_or_404(Libro, pk=libro_id)
+        
         context = check_user_logged(request)
 
 
-        context['libro'] = libro
+        context['libro'] = libro_a_calficar
         context['opciones_puntaje'] = Resenia.PUNTAJES
         return render(request, "core/calificar.html", context)
+    
+
+    """ verificar si el usuario ya reseño
+        si ya lo hizo actualizar la reseña anterior y marcarla como actualizada
+        si no guardar  los datos de la reseña"""      
     if request.method == 'POST':
-        pass
+        comentario = request.POST['comentario']
+        puntaje = int(request.POST['puntaje'])
+        try:
+            resenia = Resenia.objects.get(usuario=request.user, libro=libro_a_calficar)
+            resenia.comentario = comentario.strip().capitalize()
+            resenia.puntaje = puntaje
+            resenia.save()
+        except Resenia.DoesNotExist:
+            resenia = Resenia(libro=libro_a_calficar, 
+                usuario=request.user, 
+                puntaje=puntaje,
+                comentario=resenia )
+            resenia.save()
+        return HttpResponseRedirect(reverse("core:calificar", args=[libro_id]))
+        
     
         
