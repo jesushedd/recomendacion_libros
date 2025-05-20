@@ -277,3 +277,14 @@ footer {
   color: #333;
 }
 
+.resenias{
+  color: white;
+  background-color: black;
+  padding: 50px;
+  
+}
+
+.resenia-individual, .resenias{
+  border: double white 3px;
+}
+

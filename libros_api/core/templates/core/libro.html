@@ -19,14 +19,28 @@
         {% get_static_prefix as STATIC_URL %}
         {% if libro %}
         <div class="container libro">
-        <section class="card">
-            <img width="400px" src="{{STATIC_URL}}core/images/{{libro.id}}.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                 <h5 class="card-title">{{libro.titulo}}</h5>
-                <p class="card-text">{{libro.descripcion}}</p>
-                <a href="/calificar/{{libro.id}}" class="btn btn-primary">Calficar</a>
-                </div>
-        </section>
+          <section class="card">
+              <img width="400px" src="{{STATIC_URL}}core/images/{{libro.id}}.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">{{libro.titulo}}</h5>
+                  <p class="card-text">{{libro.descripcion}}</p>
+                  <a href="/calificar/{{libro.id}}" class="btn btn-primary">Calficar</a>
+                  </div>
+          </section>
+          <section class="resenias">
+            <h2>Reseñas</h2>
+            {% with resenias=libro.get_resenias %}
+            {% if resenias %}
+              {% for resenia in resenias %}
+                <article class="resenia-individual" >
+                  <div>Usuario: {{ resenia.usuario.first_name }}</div>
+                  <div>Puntaje: {{ resenia.puntaje }}</div>
+                  <div>{{ resenia.comentario }}</div>
+                </article>
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+          </section>
         </div>
         {% endif %}    
 

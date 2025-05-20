@@ -12,7 +12,6 @@ from django.urls import reverse
 def pag_principal(request):
     if request.method == 'GET':
         catalogo = Libro.objects.all()[:5]
-
         context = check_user_logged(request)
         context['catalogo'] = catalogo
         return render(request, "core/index.html", context)

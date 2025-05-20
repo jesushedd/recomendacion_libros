@@ -25,11 +25,13 @@
                   <h5 class="card-title">{{libro.titulo}}</h5>
                   <p class="card-text">{{libro.descripcion}}</p>
                 </div>
-              {% if libro.puntaje_promedio %}
-                <div>{{ libro.puntaje_promedio }}</div>
-              {% else %}
-                <div>No calificado</div>
-              {% endif %}
+              {%with puntaje_libro=libro.puntaje_promedio %}  
+                {% if puntaje_libro %}
+                  <div>{{ puntaje_libro }}</div>
+                {% else %}
+                  <div>No calificado</div>
+                {% endif %}
+              {% endwith %}  
             </article>
           </a>
           {% endfor %}

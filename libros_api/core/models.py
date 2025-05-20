@@ -13,11 +13,14 @@ class Libro(models.Model):
 
     def puntaje_promedio(self):
         #obtener todas las resenias del libro
-        resenias = Resenia.objects.filter(libro=self)
+        resenias = self.get_resenias()
         if resenias:
             puntajes = (r.puntaje for r in resenias)
             return fmean(puntajes)
-
+        return False
+    def get_resenias(self):
+        resenias = Resenia.objects.filter(libro=self)
+        return Resenia.objects.filter(libro=self)
 
 class Resenia(models.Model):
     PUNTAJES = [
@@ -31,5 +34,8 @@ class Resenia(models.Model):
     usuario = models.ForeignKey(User, null=False, on_delete=models.DO_NOTHING)
     puntaje= models.IntegerField(choices=PUNTAJES)
     comentario=models.TextField()
+
+    def __str__(self):
+        return f"libro: {self.libro.titulo}, usuario:{self.usuario.first_name}, comentario: {self.comentario}"
 
 
