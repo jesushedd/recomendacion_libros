@@ -13,28 +13,52 @@
   {%  include "core/subs/header.html" %}
   <main class="content">
     <!-- Tu contenido principal de libros -->
-    <div class="container catalogo">
+    <div class="catalogo">
       {%   if catalogo     %}
+
           {% load static %}
           {% get_static_prefix as STATIC_URL %}
-          {% for libro in catalogo %}
-          <a href="/libro/{{libro.id}}">
-            <article class="card" style="width: 18rem;">
-              <img  src="{{STATIC_URL}}core/images/{{libro.id}}.jpg" class="card-img-top" alt="{{libro.titulo}} portada">
-              <div class="card-body"> 
-                  <h5 class="card-title">{{libro.titulo}}</h5>
-                  <p class="card-text">{{libro.descripcion}}</p>
-                </div>
-              {%with puntaje_libro=libro.puntaje_promedio %}  
-                {% if puntaje_libro %}
-                  <div>{{ puntaje_libro }}</div>
+          <div class="catalogo-content container">
+            {% for libro in catalogo %}
+            <a href="/libro/{{libro.id}}">
+              <article class="card" style="width: 18rem;">
+                <img  src="{{STATIC_URL}}core/images/{{libro.id}}.jpg" class="card-img-top" alt="{{libro.titulo}} portada">
+                <div class="card-body">
+                    <h5 class="card-title">{{libro.titulo}}</h5>
+                    <p class="card-text">{{libro.descripcion}}</p>
+                  </div>
+                {%with puntaje_libro=libro.puntaje_promedio %}
+                  {% if puntaje_libro %}
+                    <div>{{ puntaje_libro }}</div>
+                  {% else %}
+                    <div>No calificado</div>
+                  {% endif %}
+                {% endwith %}
+              </article>
+            </a>
+            {% endfor %}
+          </div>
+          <nav clas="catalogo-nav" aria-label="Page navigation">
+            <ul class="pagination">
+              {% if catalogo.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page=1">Primera</a></li>
+              <li class="page-item"><a class="page-link" href="?page={{ catalogo.previous_page_number }}">Anterior</a></li>
                 {% else %}
-                  <div>No calificado</div>
-                {% endif %}
-              {% endwith %}  
-            </article>
-          </a>
-          {% endfor %}
+                  <li class="page-item disabled"><span class="page-link">Primera</span></li>
+                  <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+              {% endif %}
+
+              <li class="page-item active"><span class="page-link">{{ catalogo.number }}</span></li>
+
+              {% if catalogo.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ catalogo.next_page_number }}">Siguiente</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ catalogo.paginator.num_pages }}">Última</a></li>
+                {% else %}
+                  <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+                  <li class="page-item disabled"><span class="page-link">Última</span></li>
+              {% endif %}
+            </ul>
+          </nav>
       {%  endif %}
     </div>
   </main>

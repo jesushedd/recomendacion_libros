@@ -263,7 +263,7 @@ footer {
   background-color: #2b2b6d;
 }
 /*Catalogo de Libros*/
-.catalogo{
+.catalogo-content{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 

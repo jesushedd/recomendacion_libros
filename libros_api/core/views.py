@@ -7,13 +7,20 @@ from django.contrib.auth.views import redirect_to_login
 from .helpers import check_user_logged
 from .models import Resenia
 from django.urls import reverse
+from django.core.paginator import Paginator
 # Create your views here.
 
 def pag_principal(request):
     if request.method == 'GET':
-        catalogo = Libro.objects.all()[:5]
+        try:
+            pagina = int(request.GET['page'])
+        except KeyError:
+            pagina = 1
+        catalogo = Libro.objects.all()
+        paginator = Paginator(catalogo, 5)
+        sub_catalogo = paginator.get_page(pagina)
         context = check_user_logged(request)
-        context['catalogo'] = catalogo
+        context['catalogo'] = sub_catalogo
         return render(request, "core/index.html", context)
 def registro(request):
     if request.method == 'GET':
